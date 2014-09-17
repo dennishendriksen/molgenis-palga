@@ -3,9 +3,8 @@ package org.molgenis.palga.elasticsearch;
 import org.molgenis.data.DataService;
 import org.molgenis.data.Repository;
 import org.molgenis.data.elasticsearch.ElasticsearchRepository;
-import org.molgenis.elasticsearch.ElasticSearchService;
+import org.molgenis.data.elasticsearch.SearchService;
 import org.molgenis.palga.PalgaSample;
-import org.molgenis.search.SearchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
@@ -38,7 +37,6 @@ public class ElasticSearchRepositoryRegistrator implements ApplicationListener<C
 	{
 		Repository repository = dataService.getRepositoryByEntityName(PalgaSample.ENTITY_NAME);
 		dataService.removeRepository(PalgaSample.ENTITY_NAME);
-		dataService.addRepository(new ElasticsearchRepository(repository.getEntityMetaData(),
-				(ElasticSearchService) elasticSearchService));
+		dataService.addRepository(new ElasticsearchRepository(repository.getEntityMetaData(), elasticSearchService));
 	}
 }
